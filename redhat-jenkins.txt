@@ -1,0 +1,51 @@
+df -h
+mkdir  /cdrom
+cd  /cdrom
+ln  –s /run/media/jasim/RHEL-7.6 Server.x86_64/
+ls
+cd  /etc/yum.repos.d
+Vi  cdrom.repo
+
+[cdrom]
+Baseurl=file:///cdrom
+Gpgcheck=0
+Enable=1
+
+cd /cdrom
+ls
+cd /RHEL-7.6 Server.x86_64 
+cd Packages
+ls |grep createrepo
+rpm -ivh createrepo-0.9.9-28.e......
+yum repolist all
+createrepo -v /cdrom
+yum install tree
+tree
+
+Jenkins
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo --no-check-certificate
+
+output :
+
+--2022-08-20 03:28:47--  https://pkg.jenkins.io/redhat-stable/jenkins.repo
+Resolving pkg.jenkins.io (pkg.jenkins.io)... 151.101.18.133, 2a04:4e42:3::645
+Connecting to pkg.jenkins.io (pkg.jenkins.io)|151.101.18.133|:443... connected.
+WARNING: cannot verify pkg.jenkins.io's certificate, issued by ‘/C=US/O=Let's Encrypt/CN=R3’:
+  Issued certificate has expired.
+HTTP request sent, awaiting response... 200 OK
+Length: 85
+Saving to: ‘/etc/yum.repos.d/jenkins.repo’
+
+100%[=====================================================================>] 85          --.-K/s   in 0s
+
+2022-08-20 03:28:48 (2.09 MB/s) - ‘/etc/yum.repos.d/jenkins.repo’ saved [85/85]
+
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install java-11-openjdk
+sudo yum install jenkins
+sudo systemctl daemon-reload
