@@ -1,19 +1,19 @@
 df -h
 mkdir  /cdrom
 cd  /cdrom
-ln  –s /run/media/jasim/RHEL-7.6 Server.x86_64/
+ln  –s /run/media/lakshmi/RHEL-7.9\ Server.x86_64/
 ls
 cd  /etc/yum.repos.d
 Vi  cdrom.repo
 
 [cdrom]
-Baseurl=file:///cdrom
-Gpgcheck=0
-Enable=1
+baseurl=file:///cdrom
+gpgcheck=0
+enable=1
 
 cd /cdrom
 ls
-cd /RHEL-7.6 Server.x86_64 
+cd RHEL-7.9\ Server.x86_64/
 cd Packages
 ls |grep createrepo
 rpm -ivh createrepo-0.9.9-28.e......
